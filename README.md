@@ -2,7 +2,7 @@
 
 # Peramalan Kuantitas Obat Generik RSJ Menur Surabaya dengan ARIMA Box-Jenkins
 
-**Analisis deret waktu untuk rasionalisasi dan proyeksi kebutuhan obat generik bulanan menggunakan metode ARIMA Box-Jenkins**
+**Analisis deret waktu untuk rasionalisasi dan proyeksi kebutuhan obat generik bulanan RSJ Menur Surabaya menggunakan metode ARIMA Box-Jenkins**
 
 ![R](https://img.shields.io/badge/R-4.x-276DC3?style=flat-square&logo=r&logoColor=white)
 ![forecast](https://img.shields.io/badge/forecast-package-2E8B57?style=flat-square)
@@ -17,12 +17,17 @@
 
 ## Data
 
+Data yang digunakan merupakan bagian dari dataset publik pengadaan obat bulanan di RS Menur Surabaya.
+
 | Detail | Keterangan |
 |---|---|
-| Sumber | `Book1.xlsx` |
-| Periode | April 2021 - Mei 2026 (62 observasi bulanan) |
-| Data latih | 50 bulan (April 2021 - Mei 2025) |
-| Data uji | 12 bulan (Juni 2025 - Mei 2026) |
+| **Sumber Data** | [Open Data Provinsi Jawa Timur - Jumlah Pengadaan Obat Berdasarkan Golongan Obat](https://opendata.jatimprov.go.id/dataset/jumlah-pengadaan-obat-berdasarkan-golongan-obat-3) |
+| **File Olahan** | `Book1.xlsx` (filter pada kategori obat generik) |
+| **Periode Terpakai** | April 2021 – Mei 2026 (62 observasi bulanan) |
+| **Data Latih (Train)** | 50 bulan (April 2021 – Mei 2025) |
+| **Data Uji (Test)** | 12 bulan (Juni 2025 – Mei 2026) |
+
+> 📌 **Catatan Pengolahan Data:** Dataset asli dari portal Open Data Jatim memiliki rentang waktu yang lebih panjang dan mencakup berbagai golongan obat. Untuk fokus penelitian ini, data difilter khusus pada kategori **obat generik** dengan rentang periode **April 2021 hingga Mei 2026** guna menjaga konsistensi deret waktu dan menghindari *structural break* akibat perbedaan pola pencatatan historis lama.
 
 ## Metodologi
 
