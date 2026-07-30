@@ -1,0 +1,16 @@
+"Model","AICc","Signifikansi","White_Noise","MAPE"
+"ARIMA(2,1,2)",-96.74,"Signifikan Semua","Lolos (WN)",3.1126
+"ARIMA(1,1,0)",-96.52,"Ada Tidak Signifikan","Lolos (WN)",4.2781
+"ARIMA(0,1,1)",-96.5,"Ada Tidak Signifikan","Lolos (WN)",4.3038
+"ARIMA(3,1,0)",-95.07,"Ada Tidak Signifikan","Lolos (WN)",4.9163
+"ARIMA(0,1,2)",-94.42,"Ada Tidak Signifikan","Lolos (WN)",4.2242
+"ARIMA(3,1,2)",-94.35,"Ada Tidak Signifikan","Lolos (WN)",3.0964
+"ARIMA(2,1,3)",-94.33,"Ada Tidak Signifikan","Lolos (WN)",3.1071
+"ARIMA(2,1,0)",-94.29,"Ada Tidak Signifikan","Lolos (WN)",4.3285
+"ARIMA(1,1,1)",-94.26,"Ada Tidak Signifikan","Lolos (WN)",4.2875
+"ARIMA(0,1,3)",-94.15,"Ada Tidak Signifikan","Lolos (WN)",4.6018
+"ARIMA(1,1,2)",-94.01,"Ada Tidak Signifikan","Lolos (WN)",4.2334
+"ARIMA(3,1,1)",-93.03,"Ada Tidak Signifikan","Lolos (WN)",4.7022
+"ARIMA(3,1,3)",-92.38,"Ada Tidak Signifikan","Lolos (WN)",3.0897
+"ARIMA(2,1,1)",-92.26,"Ada Tidak Signifikan","Lolos (WN)",4.5674
+"ARIMA(1,1,3)",-91.67,"Ada Tidak Signifikan","Lolos (WN)",4.6008
