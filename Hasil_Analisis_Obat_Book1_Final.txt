@@ -1,0 +1,375 @@
+========================================================
+          EKSPLORASI DATA PENUH (APR 2021 - MEI 2026)    
+========================================================
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  242.0   267.0   527.0   531.2   765.0   882.0 
+========================================================
+       PEMBAGIAN DATA (50 BLN LATIH : 12 BLN UJI)       
+========================================================
+========================================================
+                UJI STASIONERITAS DATA                 
+========================================================
+--- A. Uji Stasioneritas Ragam (Box-Cox vs Log) ---
+Lambda optimum Box-Cox = -0.1 
+Selang kepercayaan 95% lambda: -0.8 - 0.5 
+>> Keputusan: lambda = 0 berada dalam selang kepercayaan 95%, sehingga
+   Log Transformation (lambda = 0) sah digunakan untuk menstabilkan ragam.
+
+--- B. Uji Stasioneritas Rataan (Level) ---
+>> ADF Test (H0: TIDAK stasioner) pada data Log:
+
+	Augmented Dickey-Fuller Test
+
+data:  data_log
+Dickey-Fuller = -1.5418, Lag order = 3, p-value = 0.7581
+alternative hypothesis: stationary
+
+
+>> KPSS Test (H0: stasioner) pada data Log:
+
+	KPSS Test for Level Stationarity
+
+data:  data_log
+KPSS Level = 1.2675, Truncation lag parameter = 3, p-value = 0.01
+
+--- C. Differencing d = 1 ---
+>> ADF Test setelah differencing d=1:
+
+	Augmented Dickey-Fuller Test
+
+data:  data_diff
+Dickey-Fuller = -4.2695, Lag order = 3, p-value = 0.01
+alternative hypothesis: stationary
+
+
+>> KPSS Test setelah differencing d=1:
+
+	KPSS Test for Level Stationarity
+
+data:  data_diff
+KPSS Level = 0.10777, Truncation lag parameter = 3, p-value = 0.1
+
+>> Jika ADF menolak H0 (stasioner) DAN KPSS gagal tolak H0 (stasioner),
+   maka d=1 sudah cukup untuk menstasionerkan rataan.
+
+========================================================
+            IDENTIFIKASI MODEL TENTATIF                 
+========================================================
+========================================================
+   6A. KANDIDAT MODEL DARI IDENTIFIKASI VISUAL ACF/PACF   
+========================================================
+
+--- Uji Signifikansi Parameter Kandidat Visual ---
+
+> Model: ARIMA(2,1,0) 
+
+z test of coefficients:
+
+     Estimate Std. Error z value Pr(>|z|)
+ar1  0.132845   0.141397  0.9395   0.3475
+ar2 -0.029814   0.139988 -0.2130   0.8313
+
+
+> Model: ARIMA(0,1,2) 
+
+z test of coefficients:
+
+    Estimate Std. Error z value Pr(>|z|)
+ma1  0.16792    0.17273  0.9721   0.3310
+ma2  0.07629    0.18063  0.4224   0.6728
+
+
+> Model: ARIMA(2,1,2) 
+
+z test of coefficients:
+
+     Estimate Std. Error  z value  Pr(>|z|)    
+ar1  0.569412   0.078232   7.2785 3.374e-13 ***
+ar2 -0.931018   0.064710 -14.3876 < 2.2e-16 ***
+ma1 -0.429357   0.082289  -5.2177 1.812e-07 ***
+ma2  0.999999   0.104686   9.5524 < 2.2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+
+> Model: ARIMA(3,1,0) 
+
+z test of coefficients:
+
+      Estimate Std. Error z value Pr(>|z|)  
+ar1  0.1250516  0.1364069  0.9168  0.35927  
+ar2  0.0035024  0.1362527  0.0257  0.97949  
+ar3 -0.2423914  0.1337022 -1.8129  0.06984 .
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+
+> Model: ARIMA(0,1,3) 
+
+z test of coefficients:
+
+    Estimate Std. Error z value Pr(>|z|)
+ma1  0.14427    0.13860  1.0409   0.2979
+ma2  0.04465    0.14052  0.3178   0.7507
+ma3 -0.15674    0.10516 -1.4905   0.1361
+
+
+> Model: ARIMA(3,1,3) 
+
+z test of coefficients:
+
+    Estimate Std. Error z value  Pr(>|z|)    
+ar1 -0.23502    0.23816 -0.9868 0.3237334    
+ar2 -0.46300    0.13979 -3.3122 0.0009256 ***
+ar3 -0.76521    0.21490 -3.5607 0.0003698 ***
+ma1  0.30383    0.26768  1.1351 0.2563501    
+ma2  0.68249    0.15778  4.3255 1.522e-05 ***
+ma3  0.73549    0.27032  2.7208 0.0065117 ** 
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+
+> Model: ARIMA(6,1,0) 
+
+z test of coefficients:
+
+     Estimate Std. Error z value Pr(>|z|)  
+ar1  0.085142   0.133503  0.6378   0.5236  
+ar2  0.017273   0.131445  0.1314   0.8954  
+ar3 -0.169908   0.128054 -1.3268   0.1846  
+ar4  0.072248   0.128817  0.5609   0.5749  
+ar5  0.116669   0.131919  0.8844   0.3765  
+ar6  0.306559   0.133946  2.2887   0.0221 *
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+
+> Model: ARIMA(0,1,6) 
+
+z test of coefficients:
+
+     Estimate Std. Error z value Pr(>|z|)   
+ma1  0.070460   0.128078  0.5501 0.582228   
+ma2  0.053802   0.171194  0.3143 0.753311   
+ma3 -0.214164   0.156971 -1.3644 0.172455   
+ma4  0.027303   0.174610  0.1564 0.875744   
+ma5  0.056056   0.140225  0.3998 0.689334   
+ma6  0.427221   0.155163  2.7534 0.005898 **
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+
+--- TABEL KOMPARASI MODEL KANDIDAT VISUAL (kriteria utama) ---
+         Model   AICc         Signifikansi White_Noise   MAPE
+1 ARIMA(2,1,0) -94.29 Ada Tidak Signifikan  Lolos (WN) 4.3285
+2 ARIMA(0,1,2) -94.42 Ada Tidak Signifikan  Lolos (WN) 4.2242
+3 ARIMA(2,1,2) -96.74     Signifikan Semua  Lolos (WN) 3.1126
+4 ARIMA(3,1,0) -95.07 Ada Tidak Signifikan  Lolos (WN) 4.9163
+5 ARIMA(0,1,3) -94.15 Ada Tidak Signifikan  Lolos (WN) 4.6018
+6 ARIMA(3,1,3) -92.38 Ada Tidak Signifikan  Lolos (WN) 3.0897
+7 ARIMA(6,1,0) -93.79 Ada Tidak Signifikan  Lolos (WN) 2.0222
+8 ARIMA(0,1,6) -94.92 Ada Tidak Signifikan  Lolos (WN) 3.7268
+
+>> Model-model yang lolos Signifikansi & White Noise:
+         Model   AICc   MAPE
+3 ARIMA(2,1,2) -96.74 3.1126
+
+>> Hasil Seleksi (AICc terkecil di antara model valid): ARIMA(2,1,2) 
+   (MAPE model ini terhadap data uji: 3.1126 % - dilaporkan, bukan kriteria pemilihan)
+
+========================================================
+  6B. LAMPIRAN/ROBUSTNESS CHECK: GRID SEARCH p(0-3) x q(0-3) 
+  (HANYA pembanding, TIDAK dipakai sbg dasar pemilihan model 
+   utama, identifikasi tetap berbasis plot ACF/PACF di atas)
+========================================================
+
+--- Tabel Grid Search Lengkap (lampiran, urut AICc) ---
+          Model   AICc         Signifikansi White_Noise   MAPE
+10 ARIMA(2,1,2) -96.74     Signifikan Semua  Lolos (WN) 3.1126
+4  ARIMA(1,1,0) -96.52 Ada Tidak Signifikan  Lolos (WN) 4.2781
+1  ARIMA(0,1,1) -96.50 Ada Tidak Signifikan  Lolos (WN) 4.3038
+12 ARIMA(3,1,0) -95.07 Ada Tidak Signifikan  Lolos (WN) 4.9163
+2  ARIMA(0,1,2) -94.42 Ada Tidak Signifikan  Lolos (WN) 4.2242
+14 ARIMA(3,1,2) -94.35 Ada Tidak Signifikan  Lolos (WN) 3.0964
+11 ARIMA(2,1,3) -94.33 Ada Tidak Signifikan  Lolos (WN) 3.1071
+8  ARIMA(2,1,0) -94.29 Ada Tidak Signifikan  Lolos (WN) 4.3285
+5  ARIMA(1,1,1) -94.26 Ada Tidak Signifikan  Lolos (WN) 4.2875
+3  ARIMA(0,1,3) -94.15 Ada Tidak Signifikan  Lolos (WN) 4.6018
+6  ARIMA(1,1,2) -94.01 Ada Tidak Signifikan  Lolos (WN) 4.2334
+13 ARIMA(3,1,1) -93.03 Ada Tidak Signifikan  Lolos (WN) 4.7022
+15 ARIMA(3,1,3) -92.38 Ada Tidak Signifikan  Lolos (WN) 3.0897
+9  ARIMA(2,1,1) -92.26 Ada Tidak Signifikan  Lolos (WN) 4.5674
+7  ARIMA(1,1,3) -91.67 Ada Tidak Signifikan  Lolos (WN) 4.6008
+========================================================
+              MODEL FINAL & CEK OVERFITTING             
+========================================================
+>> Menjalankan Model Final Terpilih: ARIMA(2,1,2) 
+Series: obat.train.ts 
+ARIMA(2,1,2) 
+Box Cox transformation: lambda= 0 
+
+Coefficients:
+         ar1      ar2      ma1     ma2
+      0.5694  -0.9310  -0.4294  1.0000
+s.e.  0.0782   0.0647   0.0823  0.1047
+
+sigma^2 = 0.006495:  log likelihood = 54.07
+AIC=-98.14   AICc=-96.74   BIC=-88.68
+
+Training set error measures:
+                   ME     RMSE      MAE      MPE     MAPE      MASE
+Training set 9.762277 28.98087 18.65892 1.820408 4.401225 0.1186875
+                    ACF1
+Training set -0.09281591
+
+--- Uji Signifikansi Parameter Final ---
+
+z test of coefficients:
+
+     Estimate Std. Error  z value  Pr(>|z|)    
+ar1  0.569412   0.078232   7.2785 3.374e-13 ***
+ar2 -0.931018   0.064710 -14.3876 < 2.2e-16 ***
+ma1 -0.429357   0.082289  -5.2177 1.812e-07 ***
+ma2  0.999999   0.104686   9.5524 < 2.2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+
+--- Uji Overfitting ---
+Model over-p  (p+1, q): 
+   Signifikansi : Ada Tidak Signifikan 
+   White Noise  : Lolos (WN) 
+   AICc         : -94.35 (model final: -96.74 -> AICc TIDAK membaik )
+
+Model over-q  (p, q+1): 
+   Signifikansi : Ada Tidak Signifikan 
+   White Noise  : Lolos (WN) 
+   AICc         : -94.33 (model final: -96.74 -> AICc TIDAK membaik )
+
+Model over-pq (p+1, q+1): 
+   Signifikansi : Ada Tidak Signifikan 
+   White Noise  : Lolos (WN) 
+   AICc         : -92.38 (model final: -96.74 -> AICc TIDAK membaik )
+
+>> Model final dianggap optimal jika model overfitting TIDAK signifikan semua
+   DAN AICc-nya tidak membaik dibanding model final.
+
+========================================================
+       EVALUASI POLA MODEL (FITTED VS ACTUAL)           
+========================================================
+========================================================
+                DIAGNOSTIK SISAAN                       
+========================================================
+1) Shapiro-Wilk Test (Normalitas):
+
+	Shapiro-Wilk normality test
+
+data:  sisaan_final
+W = 0.81373, p-value = 1.844e-06
+
+2) Ljung-Box Test (White Noise), lag = 10 :
+
+	Box-Ljung test
+
+data:  sisaan_final
+X-squared = 9.6541, df.p = 6, p-value = 0.14
+
+
+>> Ljung-Box pada beberapa lag standar (pelengkap, bukan kriteria utama):
+   lag = 6 -> p-value = 0.0542 
+   lag = 12 -> p-value = 0.2518 
+   lag = 18 -> p-value = 0.0991 
+   lag = 24 -> p-value = 0.2912 
+
+--- Ringkasan Flag Keterbatasan Model (auto-generated) ---
+[FLAG] Residual TIDAK normal (Shapiro-Wilk p = 0 ). Titik forecast (mean) tetap valid secara asimtotik (CLT/Gauss-Markov),
+       namun selang kepercayaan (PI) forecast berasumsi normal sehingga
+       lebarnya mungkin kurang akurat, terutama di horizon forecast yang jauh.
+
+========================================================
+         PERAMALAN & EVALUASI DATA UJI (BACKTEST)       
+========================================================
+    Bulan Aktual Prediksi  Error APE_Pct
+1  Jun-25    798   815.94 -17.94  2.2475
+2  Jul-25    803   827.34 -24.34  3.0305
+3  Agt-25    809   811.10  -2.10  0.2595
+4  Sep-25    810   791.70  18.30  2.2587
+5  Okt-25    815   795.41  19.59  2.4036
+6  Nov-25    821   815.70   5.30  0.6451
+7  Des-25    826   823.90   2.10  0.2543
+8  Jan-26    828   809.39  18.61  2.2471
+9  Feb-26    832   793.83  38.17  4.5883
+10 Mar-26    854   798.19  55.81  6.5355
+11 Apr-26    867   815.29  51.71  5.9643
+12 Mei-26    882   820.99  61.01  6.9168
+MAPE Model terhadap Data Uji: 3.1126 %
+========================================================
+          FUTURE FORECAST (JUNI 2026 - MEI 2027)        
+========================================================
+>> Validasi ulang model_masa_depan (refit pada seluruh data):
+--- Signifikansi Parameter ---
+
+z test of coefficients:
+
+     Estimate Std. Error z value  Pr(>|z|)    
+ar1  0.088498   0.113415  0.7803    0.4352    
+ar2 -0.778001   0.104682 -7.4320 1.069e-13 ***
+ma1  0.086366   0.064813  1.3325    0.1827    
+ma2  0.999977   0.102395  9.7659 < 2.2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+
+--- Ljung-Box White Noise (lag = 10 ) ---
+
+	Box-Ljung test
+
+data:  model_masa_depan$residuals
+X-squared = 9.502, df.p = 6, p-value = 0.1473
+
+>> PERINGATAN: model_masa_depan TIDAK sepenuhnya lolos re-validasi
+   (signifikansi parameter dan/atau white noise). Forecast ke depan
+   tetap ditampilkan, tapi keterbatasan ini WAJIB disebutkan di laporan.
+
+[FLAG] Parameter tidak signifikan di model_masa_depan: ar1, ma1 
+
+         Point Forecast    Lo 80     Hi 80    Lo 95    Hi 95
+Jun 2026       882.0793 801.1080  971.2348 761.2980 1022.023
+Jul 2026       880.3899 758.9415 1021.2728 701.5872 1104.761
+Aug 2026       880.1789 721.0324 1074.4523 648.7882 1194.095
+Sep 2026       881.4740 697.7124 1113.6344 616.4929 1260.350
+Oct 2026       881.7531 682.3297 1139.4616 595.7276 1305.107
+Nov 2026       880.7697 665.6719 1165.3718 573.9684 1351.564
+Dec 2026       880.4659 647.6440 1196.9850 550.4669 1408.296
+Jan 2027       881.2037 633.2918 1226.1645 531.6847 1460.490
+Feb 2027       881.5056 622.1682 1248.9423 517.3748 1501.914
+Mar 2027       880.9580 610.7343 1270.7441 503.0699 1542.702
+Apr 2027       880.6748 598.5838 1295.7052 487.9271 1589.558
+May 2027       881.0756 587.8990 1320.4552 474.5557 1635.834
+========================================================
+         VALIDASI ROLLING FORECAST (WALK-FORWARD)       
+========================================================
+
+--- Tabel Rolling Forecast (Walk-Forward) ---
+    Bulan Aktual Pred_Roll APE_Roll
+1  Jun-25    798    815.94   2.2475
+2  Jul-25    803    806.19   0.3974
+3  Agt-25    809    784.79   2.9930
+4  Sep-25    810    794.61   1.8996
+5  Okt-25    815    810.33   0.5736
+6  Nov-25    821    816.80   0.5121
+7  Des-25    826    822.48   0.4259
+8  Jan-26    828    825.90   0.2531
+9  Feb-26    832    827.80   0.5050
+10 Mar-26    854    833.13   2.4437
+11 Apr-26    867    858.51   0.9789
+12 Mei-26    882    871.22   1.2227
+
+MAPE Rolling Forecast: 1.2044 %
+MAPE Fixed Forecast   : 3.1126 %
+>> Perbandingan: jika MAPE rolling < MAPE fixed, forecast walk-forward
+   lebih stabil karena model di-refit tiap langkah dengan data terbaru.
+   Jika sebaliknya, model fixed sudah cukup baik dan refit berulang
+   tidak memberi banyak keuntungan tambahan.
+
+=== SKRIP SELESAI ===
