@@ -1,6 +1,6 @@
 <div align="center">
 
-# Peramalan Kuantitas Obat Generik dengan ARIMA Box-Jenkins
+# Peramalan Kuantitas Obat Generik RSJ Menur Surabaya dengan ARIMA Box-Jenkins
 
 **Analisis deret waktu untuk rasionalisasi dan proyeksi kebutuhan obat generik bulanan menggunakan metode ARIMA Box-Jenkins**
 
